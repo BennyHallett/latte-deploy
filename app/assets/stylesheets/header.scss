@@ -1,0 +1,21 @@
+@import 'color';
+
+.navbar-inverse {
+  background-color: $espresso;
+  border-color: $mocha;
+}
+
+.navbar .btn-success {
+  background: $instant;
+  border-color: $mocha;
+}
+
+.navbar .btn-success:hover {
+  background: $latte;
+  border-color: $instant;
+}
+
+.navbar-brand {
+  text-shadow: 1px 1px 1px black;
+  color: $milk!important;
+}
