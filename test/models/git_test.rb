@@ -18,7 +18,7 @@ class GitTest < ActiveSupport::TestCase
 
   test 'repo is cloned' do
     begin
-      create_test_repo
+      TestHelper.create_test_repo('test_repo')
 
       @repo.uri = 'file:///tmp/test_repo'
       LatteDeploy::Git.clone(@repo)
@@ -26,19 +26,9 @@ class GitTest < ActiveSupport::TestCase
       assert Dir.exist?('/tmp/test_project/test_repo')
       assert Dir.exist?('/tmp/test_project/test_repo/.git')
     ensure
-      delete_test_repo
+      TestHelper.delete_test_repo('test_repo')
+      TestHelper.delete_test_repo('test_project')
     end
   end
-
-  def create_test_repo
-    %x[cd /tmp && mkdir test_repo && cd test_repo && git init]
-  end
-
-  def delete_test_repo
-    %x[rm -rf /tmp/test_repo]
-    %x[rm -rf /tmp/test_project]
-  end
-
-
 
 end

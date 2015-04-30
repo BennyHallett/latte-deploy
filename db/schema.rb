@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150429140258) do
   create_table "repos", force: :cascade do |t|
     t.string   "name"
     t.string   "uri"
+    t.string   "path"
     t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -10,3 +10,15 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+class TestHelper
+
+  def self.create_test_repo(name)
+    %x[cd /tmp && mkdir #{name} && cd #{name} && git init]
+  end
+
+  def self.delete_test_repo(name)
+    %x[rm -rf /tmp/#{name}]
+  end
+
+end

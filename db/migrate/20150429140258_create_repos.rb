@@ -3,6 +3,7 @@ class CreateRepos < ActiveRecord::Migration
     create_table :repos do |t|
       t.string :name
       t.string :uri
+      t.string :path
 
       t.belongs_to :project
 
