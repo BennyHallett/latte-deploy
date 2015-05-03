@@ -1,19 +1,10 @@
-.container
-  .row
-    .col-md-9
-      .projects
-        - @projects.each do |p|
-          .well.project
-            %h3
-              = p.name
+.projects
+  - @projects.each do |p|
+    .well.project
+      %h3
+        = p.name
 
-            - p.repos.each do |r|
-              .repo
-                %h4
-                  = r.name
-
-    .col-md-3
-      .sidebar
-        %a{ href: '/add_repo' }
-          %i.fa.fa-plus-circle
-          Add a repo
+      - p.repos.each do |r|
+        .repo
+          %h4
+            = r.name

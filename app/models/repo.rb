@@ -17,6 +17,10 @@ class Repo < ActiveRecord::Base
     me
   end
 
+  def key
+    name.split(' ').map(&:downcase).join('_')
+  end
+
   def create_release(name)
     release = Release.create(name: name)
     releases << release
