@@ -1,0 +1,8 @@
+- if flash && flash.any?
+  .container
+    .messages
+      - flash.each do |k, v|
+        .alert{ class: "alert-#{k}" }
+          %button.close{ data: { dismiss: 'alert' } } x
+          %strong
+            = v
