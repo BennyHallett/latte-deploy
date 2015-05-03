@@ -21,4 +21,8 @@ class TestHelper
     %x[rm -rf /tmp/#{name}]
   end
 
+  def self.new_commit_and_tag(name, filename, msg, tag)
+    %x[cd /tmp/#{name} && touch #{filename} && git add -A && git commit -m "#{msg}" && git tag -a #{tag} -m "#{msg}"]
+  end
+
 end

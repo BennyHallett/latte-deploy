@@ -21,4 +21,22 @@ class RepoTest < ActiveSupport::TestCase
     end
   end
 
+  test 'make new repo gets tags' do
+    begin
+      TestHelper.create_test_repo('aaaa')
+      TestHelper.new_commit_and_tag('aaaa', 'test_file.txt', 'Testing a thing', 'v1.0')
+      TestHelper.new_commit_and_tag('aaaa', 'test_file_2.txt', 'Testing another thing', 'v1.1')
+      project = FactoryGirl.build(:project)
+
+      repo = Repo.make('proj', 'file:///tmp/aaaa', project)
+
+      assert_equal 2, repo.releases.count
+      assert_equal 'v1.0', repo.releases.first.name
+      assert_equal 'v1.1', repo.releases.last.name
+    ensure
+      TestHelper.delete_test_repo 'aaaa'
+      TestHelper.delete_test_repo 'test_project'
+    end
+  end
+
 end
