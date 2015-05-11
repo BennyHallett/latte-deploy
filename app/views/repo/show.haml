@@ -1,0 +1,14 @@
+%ol.breadcrumb
+  %li
+    %a{ href: root_path }
+      Latte Deploy
+  %li
+    = @repo.project.name
+  %li
+    = @repo.name
+
+.repo-header
+  %h2
+    = @repo.name
+  .location
+    = @repo.uri

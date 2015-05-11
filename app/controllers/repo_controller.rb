@@ -12,4 +12,9 @@ class RepoController < ApplicationController
     redirect_to show_repo_path(project.key, repo.key)
   end
 
+  def show
+    project = Project.find_by(key: params['project'])
+    @repo = project.repos.find_by(key: params['repo'])
+  end
+
 end
