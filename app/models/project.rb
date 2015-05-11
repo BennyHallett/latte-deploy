@@ -6,11 +6,8 @@ class Project < ActiveRecord::Base
     found = Project.find_by(name: name)
     return found if found
 
-    Project.create(name: name)
-  end
-
-  def key
-    name.split(' ').map(&:downcase).join('_')
+    project_key = name.split(' ').map(&:downcase).join('_')
+    Project.create(name: name, key: project_key)
   end
 
 end

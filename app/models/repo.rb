@@ -13,12 +13,9 @@ class Repo < ActiveRecord::Base
     repo.tags.each { |t| me.create_release(t.name) }
 
     me.path = LatteDeploy::Git.repo_path(me)
+    me.key = name.split(' ').map(&:downcase).join('_')
     me.save
     me
-  end
-
-  def key
-    name.split(' ').map(&:downcase).join('_')
   end
 
   def create_release(name)

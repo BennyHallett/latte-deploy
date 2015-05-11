@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502234919) do
+ActiveRecord::Schema.define(version: 20150511220919) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "key"
   end
 
+  add_index "projects", ["key"], name: "index_projects_on_key"
   add_index "projects", ["name"], name: "index_projects_on_name"
 
   create_table "releases", force: :cascade do |t|
@@ -36,8 +38,10 @@ ActiveRecord::Schema.define(version: 20150502234919) do
     t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "key"
   end
 
+  add_index "repos", ["key"], name: "index_repos_on_key"
   add_index "repos", ["name"], name: "index_repos_on_name"
 
 end
