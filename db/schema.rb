@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20150502234919) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "projects", ["name"], name: "index_projects_on_name"
+
   create_table "releases", force: :cascade do |t|
     t.string   "name"
     t.integer  "repo_id"
@@ -35,5 +37,7 @@ ActiveRecord::Schema.define(version: 20150502234919) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "repos", ["name"], name: "index_repos_on_name"
 
 end

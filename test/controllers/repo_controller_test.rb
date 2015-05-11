@@ -16,7 +16,7 @@ class RepoControllerTest < ActionController::TestCase
       TestHelper.create_test_repo 'new_repo'
       post :create, project: 'New Project', name: 'Something', uri: 'file:///tmp/new_repo'
 
-      assert_redirected_to show_repo_path('new_project', 'new_repo')
+      assert_redirected_to show_repo_path('new_project', 'something')
       assert_equal Project.count, 1
       assert_equal 'New Project', Project.first.name
       assert_equal Repo.count, 1
