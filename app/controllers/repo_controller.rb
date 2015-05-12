@@ -15,6 +15,8 @@ class RepoController < ApplicationController
   def show
     project = Project.find_by(key: params['project'])
     @repo = project.repos.find_by(key: params['repo'])
+
+    flash.now['warning'] = "This repo doesn't appear to be a Capistrano project." unless @repo.environments.any?
   end
 
 end

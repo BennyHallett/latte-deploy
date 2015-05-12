@@ -27,4 +27,39 @@ class RepoControllerTest < ActionController::TestCase
     end
   end
 
+  test 'show warning if no environments exist' do
+    project = FactoryGirl.build(:project)
+    repo = FactoryGirl.build(:repo, key: 'test_repo')
+    project.repos << repo
+    project.save
+    repo.save
+
+    get :show, project: project.key, repo: repo.key
+
+    assert_response :success
+    assert_select '.messages', 1
+    assert_select '.messages' do
+      assert_select '.alert-warning' do
+        assert_select 'strong', "This repo doesn't appear to be a Capistrano project."
+      end
+    end
+  end
+
+  test 'show no warning if environments exist' do
+    project = FactoryGirl.build(:project)
+    repo = FactoryGirl.build(:repo, key: 'test_repo')
+    env = FactoryGirl.build(:environment)
+    project.repos << repo
+    repo.environments << env
+    project.save
+    repo.save
+    env.save
+
+    get :show, project: project.key, repo: repo.key
+
+    assert_response :success
+    assert_select '.messages', 0
+
+  end
+
 end

@@ -1,6 +1,7 @@
 class Repo < ActiveRecord::Base
   belongs_to :project
   has_many :releases
+  has_many :environments
 
   # TODO: What happens if we clone a thing that doesnt exist?
 
