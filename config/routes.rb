@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'add_repo' => 'repo#create', as: :create_repo
 
   ## Project/Repo Details ##
+  get '/project/:project' => 'project#show', as: :show_project
   get '/project/:project/repo/:repo' => 'repo#show', as: :show_repo
 
   ## API ##

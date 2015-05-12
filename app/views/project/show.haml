@@ -1,0 +1,16 @@
+%ol.breadcrumb
+  %li
+    %a{ href: root_path }
+      Latte Deploy
+  %li
+    = @project.name
+
+.project-header
+  %h2
+    = @project.name
+
+  %h3 Repos
+  %ol.repos
+    - @project.repos.each do |r|
+      %li.repo
+        = r.name

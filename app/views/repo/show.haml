@@ -3,7 +3,8 @@
     %a{ href: root_path }
       Latte Deploy
   %li
-    = @repo.project.name
+    %a{ href: show_project_path(project: @repo.project.key) }
+      = @repo.project.name
   %li
     = @repo.name
 
@@ -11,4 +12,6 @@
   %h2
     = @repo.name
   .location
+    %i.fa.fa-globe
+    &nbsp;
     = @repo.uri
