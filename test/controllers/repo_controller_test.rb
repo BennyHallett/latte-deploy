@@ -59,7 +59,32 @@ class RepoControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_select '.messages', 0
+  end
 
+  test 'show environments when they exist' do
+    project = FactoryGirl.build(:project)
+    repo = FactoryGirl.build(:repo, key: 'test_repo')
+    staging = FactoryGirl.build(:environment, name: 'Staging', version: 'v1.2.4')
+    prod = FactoryGirl.build(:environment, name: 'Production', version: 'v1.2.0')
+    project.repos << repo
+    repo.environments << staging
+    repo.environments << prod
+    project.save
+    repo.save
+    staging.save
+    prod.save
+
+    get :show, project: project.key, repo: repo.key
+
+    assert_response :success
+    assert_select '.environments', 1
+    assert_select '.environment', 2
+    assert_select '.environments' do
+      assert_select 'p', 'Production'
+      assert_select 'strong', 'v1.2.0'
+      assert_select 'p', 'Staging'
+      assert_select 'strong', 'v1.2.4'
+    end
   end
 
 end

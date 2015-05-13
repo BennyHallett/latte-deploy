@@ -8,6 +8,7 @@ class Repo < ActiveRecord::Base
   def self.make(name, uri, project)
     me = Repo.create(name: name, uri: uri)
     project.repos << me
+    me.save
     project.save
 
     repo = LatteDeploy::Git.clone(me)

@@ -15,3 +15,17 @@
     %i.fa.fa-globe
     &nbsp;
     = @repo.uri
+
+.environments
+  .row.row-centered
+    - @repo.environments.each_with_index do |env, i|
+      - if i > 0
+        .col-md-1.env-spacer.col-centered
+          %i.fa.fa-long-arrow-right.fa-2x
+
+      .col-md-2.col-centered
+        .environment.alert.alert-success
+          %p
+            = env.name
+          %strong
+            = env.version

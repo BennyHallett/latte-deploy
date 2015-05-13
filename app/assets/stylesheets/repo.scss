@@ -1,3 +1,23 @@
-// Place all the styles related to the Repo controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.environments {
+  margin-top: 1em;
+}
+
+.environment {
+  text-align: center;
+}
+
+.env-spacer {
+  text-align: center!important;
+  padding-top: 20px;
+}
+
+.row-centered {
+  text-align: center;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
