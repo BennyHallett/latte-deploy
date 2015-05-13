@@ -21,6 +21,10 @@ class TestHelper
     %x[rm -rf /tmp/#{name}]
   end
 
+  def self.add_cap_environment(name, env)
+    %x[cd /tmp/#{name} && mkdir -p config/deploy && touch config/deploy/#{env}.rb && git add -A && git commit -m "Added env #{env}"]
+  end
+
   def self.new_commit_and_tag(name, filename, msg, tag)
     %x[cd /tmp/#{name} && touch #{filename} && git add -A && git commit -m "#{msg}" && git tag -a #{tag} -m "#{msg}"]
   end

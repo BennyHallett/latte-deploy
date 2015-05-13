@@ -39,4 +39,24 @@ class RepoTest < ActiveSupport::TestCase
     end
   end
 
+  test 'make new repo gets environments' do
+    begin
+      TestHelper.create_test_repo('abcd')
+      TestHelper.add_cap_environment('abcd', 'staging')
+      TestHelper.add_cap_environment('abcd', 'production')
+      project = FactoryGirl.build(:project)
+
+      repo = Repo.make('proj', 'file:///tmp/abcd', project)
+
+      assert_equal 2, repo.environments.count
+      assert_equal 'Staging', repo.environments.first.name
+      assert_equal 'Unknown', repo.environments.first.version
+      assert_equal 'Production', repo.environments.last.name
+      assert_equal 'Unknown', repo.environments.last.version
+    ensure
+      TestHelper.delete_test_repo 'abcd'
+      TestHelper.delete_test_repo 'test_project'
+    end
+  end
+
 end
