@@ -24,8 +24,9 @@
           %i.fa.fa-long-arrow-right.fa-2x
 
       .col-md-2.col-centered
-        .environment.alert.alert-success
+        - status = env.status
+        .environment.alert{ class: "alert-#{status.status}" }
           %p
             = env.name
           %strong
-            = env.version
+            = status.text

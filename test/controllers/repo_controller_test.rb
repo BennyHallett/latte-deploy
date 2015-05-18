@@ -64,15 +64,24 @@ class RepoControllerTest < ActionController::TestCase
   test 'show environments when they exist' do
     project = FactoryGirl.build(:project)
     repo = FactoryGirl.build(:repo, key: 'test_repo')
-    staging = FactoryGirl.build(:environment, name: 'Staging', version: 'v1.2.4')
-    prod = FactoryGirl.build(:environment, name: 'Production', version: 'v1.2.0')
+    staging = FactoryGirl.build(:environment, name: 'Staging')
+    prod = FactoryGirl.build(:environment, name: 'Production')
+    old_release = FactoryGirl.build(:release, name: 'v1.2.0')
+    new_release = FactoryGirl.build(:release, name: 'v1.2.4')
+    prod_activity = FactoryGirl.build(:release_activity, outcome: 'success')
+    staging_activity = FactoryGirl.build(:release_activity, outcome: 'success')
+
     project.repos << repo
-    repo.environments << staging
-    repo.environments << prod
-    project.save
-    repo.save
-    staging.save
-    prod.save
+
+    repo.releases << old_release << new_release
+    repo.environments << staging << prod
+
+    old_release.release_activities << prod_activity
+    new_release.release_activities << staging_activity
+    staging.release_activities << staging_activity
+    prod.release_activities << prod_activity
+
+    [project, repo, staging, prod, old_release, new_release, prod_activity, staging_activity].each { |o| o.save }
 
     get :show, project: project.key, repo: repo.key
 
