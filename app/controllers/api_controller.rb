@@ -14,13 +14,7 @@ class ApiController < ApplicationController
     release = repo.releases.find_by(name: params['release'])
     env = repo.environments.find_by(name: params['environment'])
 
-    activity = ReleaseActivity.create(log: params['log'], outcome: params['outcome'], release_date: DateTime.now)
-    release.release_activities << activity
-    env.release_activities << activity
-
-    release.save
-    env.save
-    activity.save
+    ReleaseActivity.make(params['outcome'], params['log'], release, env)
 
     render json: { status: 'success' }
   end
