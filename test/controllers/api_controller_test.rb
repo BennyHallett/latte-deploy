@@ -27,4 +27,40 @@ class ApiControllerTest < ActionController::TestCase
     assert_equal 'PTwo', result['projects'].last['name']
   end
 
+  test 'add activity to repo' do
+    now = DateTime.now
+
+    DateTime.expects(:now).returns(now)
+
+    project = FactoryGirl.build(:project, key: 'pj')
+    repo = FactoryGirl.build(:repo, key: 'rp')
+    environment = FactoryGirl.build(:environment, name: 'Prod')
+    release = FactoryGirl.build(:release, name: 'v1.1')
+
+    project.repos << repo
+    repo.environments << environment
+    repo.releases << release
+
+    project.save
+    repo.save
+    environment.save
+    release.save
+
+    assert_equal 0, ReleaseActivity.count
+
+    post :add_activity, project: 'pj', repo: 'rp', release: 'v1.1', environment: 'Prod', outcome: 'success', log: 'This is the log.'
+
+    assert_response :success
+    result = JSON.parse(response.body)
+    assert_equal 'success', result['status']
+
+    assert_equal 1, ReleaseActivity.count
+    activity = ReleaseActivity.first
+    assert_equal environment.id, activity.environment_id
+    assert_equal release.id, activity.release_id
+    assert_equal 'success', activity.outcome
+    assert_equal 'This is the log.', activity.log
+    assert_equal now.utc.strftime("%d/%m/%y %H:%M:%S"), activity.release_date.strftime("%d/%m/%y %H:%M:%S")
+  end
+
 end

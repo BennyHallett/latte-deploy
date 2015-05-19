@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   ## API ##
   get '/api/projects' => 'api#list_projects', as: :api_list_projects
+  post '/api/projects/:project/repos/:repo/add_activity' => 'api#add_activity', as: :api_add_activity
 end
