@@ -1,6 +1,8 @@
 class Environment < ActiveRecord::Base
+  belongs_to :repo
 
   has_many :release_activities
+  has_many :releases, through: :release_activities
 
   def status
     if release_activities.any?

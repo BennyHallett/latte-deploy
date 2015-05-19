@@ -1,5 +1,7 @@
 class ApiController < ApplicationController
 
+  protect_from_forgery with: :null_session
+
   def list_projects
     projects = {
       projects: Project.all.map { |p| { name: p.name } }

@@ -5,8 +5,8 @@ class CreateReleaseActivities < ActiveRecord::Migration
       t.datetime :release_date
       t.text :log, limit: 2048
 
-      t.belongs_to :release
-      t.belongs_to :environment
+      t.belongs_to :release, index: true
+      t.belongs_to :environment, index: true
 
       t.timestamps null: false
     end

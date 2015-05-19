@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 20150517220925) do
     t.datetime "updated_at",                  null: false
   end
 
+  add_index "release_activities", ["environment_id"], name: "index_release_activities_on_environment_id"
+  add_index "release_activities", ["release_id"], name: "index_release_activities_on_release_id"
+
   create_table "releases", force: :cascade do |t|
     t.string   "name"
     t.integer  "repo_id"
