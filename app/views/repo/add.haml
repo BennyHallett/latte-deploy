@@ -1,16 +1,17 @@
-.well
-  %h2 Add a repo
+.container
+  .well
+    %h2 Add a repo
 
-  = form_tag('/add_repo', method: 'post') do
-    .form-group
-      %label{ for: 'project' } Project
-      %input.form-control{ name: 'project', type: 'text', placeholder: 'Project name' }
-    .form-group
-      %label{ for: 'name' } Application Name
-      %input.form-control{ name: 'name', type: 'text', placeholder: 'Application name' }
-    .form-group
-      %label{ for: 'uri' } Git repo URL
-      %input.form-control{ name: 'uri', type: 'text', placeholder: 'Git repo URL' }
-    %button.btn.btn-success{ type: 'submit' }
-      %i.fa.fa-plus
-      Add It!
+    = form_tag('/add_repo', method: 'post') do
+      .form-group
+        %label{ for: 'project' } Project
+        %input.form-control{ name: 'project', type: 'text', placeholder: 'Project name' }
+      .form-group
+        %label{ for: 'name' } Application Name
+        %input.form-control{ name: 'name', type: 'text', placeholder: 'Application name' }
+      .form-group
+        %label{ for: 'uri' } Git repo URL
+        %input.form-control{ name: 'uri', type: 'text', placeholder: 'Git repo URL' }
+      %button.btn.btn-success{ type: 'submit' }
+        %i.fa.fa-plus
+        Add It!

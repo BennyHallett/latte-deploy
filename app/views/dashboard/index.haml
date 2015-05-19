@@ -1,10 +1,11 @@
-.projects
-  - @projects.each do |p|
-    .well.project
-      %h3
-        = p.name
+.container
+  .projects
+    - @projects.each do |p|
+      .well.project
+        %h3
+          = p.name
 
-      - p.repos.each do |r|
-        .repo
-          %h4
-            = r.name
+        - p.repos.each do |r|
+          .repo
+            %h4
+              = r.name

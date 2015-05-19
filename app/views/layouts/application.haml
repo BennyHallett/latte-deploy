@@ -16,10 +16,4 @@
   %body
     = render 'shared/header'
     = render 'shared/messages'
-
-    .container
-      .row
-        .col-md-9
-          = yield
-        .col-md-3
-          = render 'shared/sidebar'
+    = yield

@@ -31,7 +31,7 @@ class EnvironmentTest < ActiveSupport::TestCase
     release.release_activities << success << failed
     env.release_activities << success << failed
 
-    assert_equal 'failed', env.status.status
+    assert_equal 'danger', env.status.status
     assert_equal 'v1.0', env.status.text
 
   end

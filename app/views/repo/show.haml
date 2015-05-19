@@ -1,32 +1,37 @@
-%ol.breadcrumb
-  %li
-    %a{ href: root_path }
-      Latte Deploy
-  %li
-    %a{ href: show_project_path(project: @repo.project.key) }
-      = @repo.project.name
-  %li
-    = @repo.name
+.container
+  %ol.breadcrumb
+    %li
+      %a{ href: root_path }
+        Latte Deploy
+    %li
+      %a{ href: show_project_path(project: @repo.project.key) }
+        = @repo.project.name
+    %li
+      = @repo.name
 
-.repo-header
-  %h2
-    = @repo.name
-  .location
-    %i.fa.fa-globe
-    &nbsp;
-    = @repo.uri
+  .col-md-9
+    .repo-header
+      %h2
+        = @repo.name
+      .location
+        %i.fa.fa-globe
+        &nbsp;
+        = @repo.uri
 
-.environments
-  .row.row-centered
-    - @repo.environments.each_with_index do |env, i|
-      - if i > 0
-        .col-md-1.env-spacer.col-centered
-          %i.fa.fa-long-arrow-right.fa-2x
+    .environments
+      .row.row-centered
+        - @repo.environments.each_with_index do |env, i|
+          - if i > 0
+            .col-md-1.env-spacer.col-centered
+              %i.fa.fa-long-arrow-right.fa-2x
 
-      .col-md-2.col-centered
-        - status = env.status
-        .environment.alert{ class: "alert-#{status.status}" }
-          %p
-            = env.name
-          %strong
-            = status.text
+          .col-md-2.col-centered
+            - status = env.status
+            .environment.alert{ class: "alert-#{status.status}" }
+              %p
+                = env.name
+              %strong
+                = status.text
+
+  .col-md-3
+    = render 'shared/activity', locals: { activity: @repo.release_activities }

@@ -1,0 +1,19 @@
+.sidebar
+  %h2 Recent Activity
+  .activities
+    - locals[:activity].reverse.each do |a|
+      - state = LatteDeploy::EnvironmentState.new(a.outcome, a.release.name)
+      .activity.alert{ class: "alert-#{state.status}" }
+        %p
+          %i.fa.fa-long-arrow-right
+          &nbsp;
+          = "Released #{state.text} to #{a.environment.name}."
+        %p
+          %i.fa.fa-calendar
+          &nbsp;
+          = a.release_date.latte_time
+        %p
+          %i.fa.fa-tasks
+          &nbsp;
+          %a{ href: '#'}
+            See full details.
